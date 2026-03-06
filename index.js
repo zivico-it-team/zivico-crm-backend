@@ -26,7 +26,7 @@ seedAdmin();
 
 app.use(
   cors({
-    origin: ["http://localhost:5174", "http://localhost:5173"],
+    origin: process.env.CLIENT_URL,
     methods: "GET,POST,PUT,PATCH,DELETE,OPTIONS",
     allowedHeaders: "Content-Type,Authorization",
     credentials: true,
@@ -61,7 +61,7 @@ app.use("/api/leads", require("./src/routes/leadRoutes"));
 // uploaded files serve
 app.use("/uploads", express.static("uploads"));
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+const port = process.env.PORT || 5000;
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
 });
