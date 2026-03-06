@@ -24,14 +24,15 @@ console.log("MYSQL_DB   =", process.env.MYSQL_DB);
 connectDB();
 seedAdmin();
 
-app.use(
-  cors({
-    origin: process.env.CLIENT_URL,
-    methods: "GET,POST,PUT,PATCH,DELETE,OPTIONS",
-    allowedHeaders: "Content-Type,Authorization",
-    credentials: true,
-  })
-);
+const corsOptions = {
+  origin: process.env.CLIENT_URL,
+  credentials: true,
+  methods: "GET,POST,PUT,PATCH,DELETE,OPTIONS",
+  allowedHeaders: "Content-Type,Authorization",
+};
+
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
 
 // Swagger
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
